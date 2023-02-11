@@ -54,25 +54,36 @@ else:
 
 driver.find_element(By.ID, 'submit').click()
 
+#wait until duo auth
 wait = WebDriverWait(driver, 30).until(EC.url_matches('dacs-prd'))
 
 #Navigate to Schedule Planner
 
 #Homepage nav
 driver.find_element(By.ID, 'HOMEPAGE_SELECTOR$PIMG').click()
+time.sleep(2)
 #Student center
 driver.find_element(By.XPATH, "//*[contains(text(), 'UTD Student Center')]").click()
-#Navigate to manage classes
-driver.find_element(By.ID, 'win0divPTNUI_LAND_REC_GROUPLET$15').click()
 time.sleep(2)
+#Navigate to manage classes
+manageClasses = driver.find_element(By.XPATH, "//div//div[.//span[text()='Manage My Classes']]")
+#print(manageClasses.get_attribute('innerHTML'))
+manageClasses.click()
+time.sleep(3)
 #Go to Schedule Planner
 driver.find_element(By.ID, 'win6divPTGP_STEP_DVW_PTGP_STEP_BTN_GB$2').click()
 #schedulerPlanner = driver.find_element(By.XPATH, "//*[contains(text(), 'Scheduler Planner')]")
 #schedulerPlanner = driver.find_element(By.XPATH, "//button[.//span[text()='Scheduler Planner']]")
-time.sleep(2)
+time.sleep(1)
 #Access Schedule Planner page
 driver.find_element(By.ID, 'PRJCS_DERIVED_PRJCS_LAUNCH_CS').click()
-
+time.sleep(10)
+#switch to new window and refresh
+Windows = driver.window_handles
+driver.switch_to.window(Windows[1])
+while True:
+    time.sleep(10)
+    driver.refresh()
 
 
 
