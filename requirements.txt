@@ -1,0 +1,2 @@
+selenium==4.8.0
+maskpass==0.3.7
